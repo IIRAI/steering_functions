@@ -139,14 +139,23 @@ public:
   /** \brief Returns type and length of segments of path from state1 to state2 with curvature = 1.0 */
   Reeds_Shepp_Path reeds_shepp(const State &state1, const State &state2) const;
 
+  /** \brief Returns type and length of segments of all paths from state1 to state2 with curvature = 1.0 */
+  std::vector<Reeds_Shepp_Path> full_reeds_shepp(const State &state1, const State &state2) const;
+
   /** \brief Returns shortest path length from state1 to state2 with curvature = kappa_ */
   double get_distance(const State &state1, const State &state2) const;
 
   /** \brief Returns controls of the shortest path from state1 to state2 with curvature = kappa_ */
   std::vector<Control> get_controls(const State &state1, const State &state2) const;
 
+  /** \brief Returns controls of the all shortest path from state1 to state2 with curvature = kappa_ */
+  std::vector<std::vector<Control>> get_full_controls(const State &state1, const State &state2) const;
+
   /** \brief Returns shortest path from state1 to state2 with curvature = kappa_ */
   std::vector<State> get_path(const State &state1, const State &state2) const;
+
+  /** \brief Returns all shortest path from state1 to state2 with curvature = kappa_ */
+  std::vector<std::vector<State>> get_paths(const State &state1, const State &state2) const;
 
   /** \brief Returns shortest path including covariances from state1 to state2 with curvature = kappa_ */
   std::vector<State_With_Covariance> get_path_with_covariance(const State_With_Covariance &state1,

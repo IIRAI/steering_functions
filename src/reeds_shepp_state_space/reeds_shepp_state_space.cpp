@@ -172,51 +172,51 @@ void CSC(double x, double y, double phi, vector<Reeds_Shepp_State_Space::Reeds_S
   double t, u, v, L;
   double Lmin = !paths.empty() ? paths.front().length() : std::numeric_limits<double>::max();
 
-  if (LpSpLp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpSpLp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[14], t, u, v));
   }
-  if (LpSpLp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpSpLp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[14], -t, -u, -v));
   }
-  if (LpSpLp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpSpLp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[15], t, u, v));
   }
-  if (LpSpLp(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpSpLp(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[15], -t, -u, -v));
   }
-  if (LpSpRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpSpRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[12], t, u, v));
   }
-  if (LpSpRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpSpRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[12], -t, -u, -v));
   }
-  if (LpSpRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpSpRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[13], t, u, v));
   }
-  if (LpSpRp(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpSpRp(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       paths.clear();
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[13], -t, -u, -v));
   }
@@ -420,52 +420,52 @@ void CCCC(double x, double y, double phi, vector<Reeds_Shepp_State_Space::Reeds_
   double t, u, v, L;
   double Lmin = !paths.empty() ? paths.front().length() : std::numeric_limits<double>::max();
 
-  if (LpRupLumRm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))
+  if (LpRupLumRm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[2], t, u, -u, v));
   }
-  if (LpRupLumRm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))  // timeflip
+  if (LpRupLumRm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[2], -t, -u, u, -v));
   }
-  if (LpRupLumRm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))  // reflect
+  if (LpRupLumRm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[3], t, u, -u, v));
   }
-  if (LpRupLumRm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRupLumRm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[3], -t, -u, u, -v));
   }
 
-  if (LpRumLumRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))
+  if (LpRumLumRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[2], t, u, u, v));
   }
-  if (LpRumLumRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))  // timeflip
+  if (LpRumLumRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[2], -t, -u, -u, -v));
   }
-  if (LpRumLumRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)))  // reflect
+  if (LpRumLumRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[3], t, u, u, v));
   }
-  if (LpRumLumRp(-x, -y, phi, t, u, v) && Lmin >= (fabs(t) + 2. * fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRumLumRp(-x, -y, phi, t, u, v) && Lmin >= (fabs(t) + 2. * fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       paths.clear();
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[3], -t, -u, -u, -v));
   }
@@ -613,104 +613,104 @@ void CCSC(double x, double y, double phi, vector<Reeds_Shepp_State_Space::Reeds_
   double t, u, v, L;
   double Lmin = !paths.empty() ? (paths.back().length() - .5 * PI) : std::numeric_limits<double>::max();
 
-  if (LpRmSmLm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpRmSmLm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[4], t, -.5 * PI, u, v));
   }
-  if (LpRmSmLm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpRmSmLm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[4], -t, .5 * PI, -u, -v));
   }
-  if (LpRmSmLm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpRmSmLm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[5], t, -.5 * PI, u, v));
   }
-  if (LpRmSmLm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRmSmLm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[5], -t, .5 * PI, -u, -v));
   }
 
-  if (LpRmSmRm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpRmSmRm(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[8], t, -.5 * PI, u, v));
   }
-  if (LpRmSmRm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpRmSmRm(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[8], -t, .5 * PI, -u, -v));
   }
-  if (LpRmSmRm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpRmSmRm(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[9], t, -.5 * PI, u, v));
   }
-  if (LpRmSmRm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRmSmRm(-x, -y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[9], -t, .5 * PI, -u, -v));
   }
 
   // backwards
   double xb = x * cos(phi) + y * sin(phi), yb = x * sin(phi) - y * cos(phi);
-  if (LpRmSmLm(xb, yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpRmSmLm(xb, yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[6], v, u, -.5 * PI, t));
   }
-  if (LpRmSmLm(-xb, yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpRmSmLm(-xb, yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[6], -v, -u, .5 * PI, -t));
   }
-  if (LpRmSmLm(xb, -yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpRmSmLm(xb, -yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[7], v, u, -.5 * PI, t));
   }
-  if (LpRmSmLm(-xb, -yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRmSmLm(-xb, -yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[7], -v, -u, .5 * PI, -t));
   }
 
-  if (LpRmSmRm(xb, yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpRmSmRm(xb, yb, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[10], v, u, -.5 * PI, t));
   }
-  if (LpRmSmRm(-xb, yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpRmSmRm(-xb, yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[10], -v, -u, .5 * PI, -t));
   }
-  if (LpRmSmRm(xb, -yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpRmSmRm(xb, -yb, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[11], v, u, -.5 * PI, t));
   }
-  if (LpRmSmRm(-xb, -yb, phi, t, u, v) && Lmin >= (fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRmSmRm(-xb, -yb, phi, t, u, v) && Lmin >= (fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       paths.clear();
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[11], -v, -u, .5 * PI, -t));
   }
@@ -766,27 +766,27 @@ void CCSCC(double x, double y, double phi, vector<Reeds_Shepp_State_Space::Reeds
 {
   double t, u, v, L;
   double Lmin = !paths.empty() ? paths.front().length() - PI : std::numeric_limits<double>::max();
-  if (LpRmSLmRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))
+  if (LpRmSLmRp(x, y, phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[16], t, -.5 * PI, u, -.5 * PI, v));
   }
-  if (LpRmSLmRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // timeflip
+  if (LpRmSLmRp(-x, y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[16], -t, .5 * PI, -u, .5 * PI, -v));
   }
-  if (LpRmSLmRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)))  // reflect
+  if (LpRmSLmRp(x, -y, -phi, t, u, v) && Lmin >= (L = fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       reset_paths(paths, Lmin, L);
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[17], t, -.5 * PI, u, -.5 * PI, v));
   }
-  if (LpRmSLmRp(-x, -y, phi, t, u, v) && Lmin >= (fabs(t) + fabs(u) + fabs(v)))  // timeflip + reflect
+  if (LpRmSLmRp(-x, -y, phi, t, u, v) && Lmin >= (fabs(t) + fabs(u) + fabs(v)) - RS_EPS)  // timeflip + reflect
   {
-    if (Lmin > L)
+    if (Lmin - RS_EPS > L)
       paths.clear();
     paths.push_back(Reeds_Shepp_State_Space::Reeds_Shepp_Path(Reeds_Shepp_State_Space::reeds_shepp_path_type[17], -t, .5 * PI, -u, .5 * PI, -v));
   }
